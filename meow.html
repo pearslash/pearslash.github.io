@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shafwan Hasan - Responsive Frutiger Aero</title>
+    <!-- Importing Retro Pixel Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Base Frutiger Aero Variables */
+        :root {
+            --aero-blue: #00a2ed;
+            --aero-green: #79d70f;
+            --aero-glass: rgba(255, 255, 255, 0.45);
+            --aero-border: rgba(255, 255, 255, 0.8);
+            --text-color: #0b3954;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            /* Retro Pixel Font Applied Globally */
+            font-family: 'VT323', monospace;
+            font-size: 20px; /* Pixel fonts need to be a bit larger for readability */
+            overflow: hidden;
+            color: var(--text-color);
+        }
+
+        /* The Classic Frutiger Aero Background: Sky to Grass Gradient */
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #4cb8c4 0%, #3cd3ad 50%, #8dd83d 80%, #5cb822 100%);
+            z-index: -2;
+        }
+
+        /* Sun Flare Effect */
+        .sun-flare {
+            position: absolute;
+            top: -15%;
+            left: 10%;
+            width: 80vw;
+            height: 80vw;
+            max-width: 800px;
+            max-height: 800px;
+            background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.2) 40%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Floating Bubbles Animation */
+        .bubble {
+            position: absolute;
+            bottom: -50px;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.1) 60%, rgba(255,255,255,0.4) 100%);
+            border: 2px solid rgba(255,255,255,0.6);
+            border-radius: 50%;
+            box-shadow: inset 0 0 10px rgba(255,255,255,0.8), 0 4px 8px rgba(0,0,0,0.1);
+            animation: rise infinite ease-in;
+            z-index: -1;
+        }
+
+        @keyframes rise {
+            0% { transform: translateY(0) scale(1); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-120vh) scale(1.2); opacity: 0; }
+        }
+
+        /* Main Glass Container - Responsive */
+        .glass-container {
+            position: relative;
+            width: 92%;
+            max-width: 1200px;
+            height: 92%;
+            margin: 4vh auto;
+            background: var(--aero-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 2px solid var(--aero-border);
+            border-radius: 20px;
+            box-shadow: 
+                0 20px 40px rgba(0,0,0,0.15), 
+                inset 0 2px 2px rgba(255,255,255,0.9),
+                inset 0 -2px 5px rgba(255,255,255,0.3);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header Area */
+        .header {
+            padding: 20px 30px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.3) 100%);
+            border-bottom: 2px solid rgba(255,255,255,0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 5px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 3.5rem;
+            font-weight: normal;
+            color: #0b4c7a;
+            text-shadow: 2px 2px 0px rgba(255,255,255,0.8);
+            line-height: 1;
+        }
+
+        .header p {
+            margin: 0;
+            font-size: 1.3rem;
+            color: #1a5b8a;
+        }
+
+        /* Navigation Buttons */
+        .nav-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 15px 30px;
+            background: rgba(255,255,255,0.15);
+        }
+
+        .nav-btn {
+            position: relative;
+            padding: 8px 20px;
+            font-size: 1.4rem;
+            color: white;
+            cursor: pointer;
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 30px;
+            background: linear-gradient(to bottom, #54b2e8 0%, #2989d8 49%, #1e5799 50%, #207cca 100%);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: all 0.2s;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.4);
+            overflow: hidden;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 5%;
+            width: 90%; height: 45%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.1) 100%);
+            border-radius: 30px 30px 10px 10px;
+            pointer-events: none;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(to bottom, #6bc2f8 0%, #3a9aeb 49%, #2f69ab 50%, #318ddb 100%);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(to bottom, #8dd83d 0%, #6bc41c 49%, #4a9e0f 50%, #5cb822 100%);
+            border-color: #fff;
+            box-shadow: 0 0 15px rgba(121, 215, 15, 0.8);
+        }
+
+        /* Content Area */
+        .content-container {
+            flex-grow: 1;
+            padding: 0 30px 30px 30px;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .content-container::-webkit-scrollbar { width: 12px; }
+        .content-container::-webkit-scrollbar-track { background: rgba(255,255,255,0.3); border-radius: 10px; }
+        .content-container::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.9); border-radius: 10px; border: 2px solid rgba(0,0,0,0.1); }
+
+        .content-section {
+            display: none;
+            animation: slideUp 0.4s ease-out forwards;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Inner Content Panels */
+        .inner-panel {
+            background: rgba(255, 255, 255, 0.7);
+            border: 2px solid rgba(255,255,255,0.9);
+            border-radius: 15px;
+            padding: 20px 25px;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1), inset 0 2px 5px rgba(255,255,255,1);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #1b4e78;
+            font-size: 2.2rem;
+            font-weight: normal;
+            border-bottom: 2px dashed rgba(27, 78, 120, 0.3);
+            padding-bottom: 10px;
+            text-shadow: 1px 1px 0px #fff;
+        }
+
+        h3 {
+            color: #297fb8;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            font-weight: normal;
+        }
+
+        .date-badge {
+            display: inline-block;
+            background: #fff;
+            border: 2px solid #00a2ed;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            color: #006064;
+            margin-bottom: 10px;
+            box-shadow: 2px 2px 0px rgba(0, 162, 237, 0.3);
+        }
+
+        p, li {
+            line-height: 1.4;
+            font-size: 1.4rem;
+            color: #1a365d;
+        }
+
+        ul { padding-left: 25px; }
+        li { margin-bottom: 12px; }
+
+        /* Skill Pills */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .skill-pill {
+            background: #fff;
+            border: 2px solid #0277bd;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 1.4rem;
+            color: #0277bd;
+            box-shadow: 3px 3px 0px rgba(2, 119, 189, 0.2);
+            transition: transform 0.1s;
+            cursor: default;
+        }
+
+        .skill-pill:hover {
+            transform: translateY(-3px);
+            background: #e1f5fe;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                font-size: 18px;
+            }
+            .glass-container {
+                width: 95%;
+                height: 96%;
+                margin: 2vh auto;
+                border-radius: 15px;
+            }
+            .header {
+                padding: 15px;
+                text-align: center;
+                align-items: center;
+            }
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            .header p {
+                font-size: 1.1rem;
+            }
+            .nav-bar {
+                padding: 10px 15px;
+                gap: 8px;
+            }
+            .nav-btn {
+                font-size: 1.2rem;
+                padding: 6px 12px;
+                flex: 1 1 30%; /* Allow buttons to wrap nicely */
+            }
+            .content-container {
+                padding: 0 15px 15px 15px;
+            }
+            .inner-panel {
+                padding: 15px;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+            p, li, .skill-pill {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-btn {
+                flex: 1 1 45%; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Elements -->
+    <div class="background"></div>
+    <div class="sun-flare"></div>
+    <div id="bubble-container"></div>
+
+    <!-- Main UI Container -->
+    <div class="glass-container">
+        
+        <div class="header">
+            <h1>Shafwan Hasan</h1>
+            <p>shafwan.hsn@gmail.com | +1 716 520-6554 | Buffalo, NY</p>
+        </div>
+
+        <div class="nav-bar">
+            <div class="nav-btn active" onclick="switchTab('summary', this)">Summary</div>
+            <div class="nav-btn" onclick="switchTab('education', this)">Education</div>
+            <div class="nav-btn" onclick="switchTab('experience', this)">Experience</div>
+            <div class="nav-btn" onclick="switchTab('projects', this)">Projects</div>
+            <div class="nav-btn" onclick="switchTab('skills', this)">Skills</div>
+        </div>
+
+        <div class="content-container">
+            
+            <!-- Summary -->
+            <div id="summary" class="content-section active">
+                <div class="inner-panel">
+                    <h2>Professional Summary</h2>
+                    <p>Motivated SUNY Buffalo electrical engineering student passionate about all things electrical.</p>
+                    <p>Offering a strong background in problem-solving and technical documentation to deliver high-quality results and support team goals within fast-paced environments while being highly adaptable and proactive.</p>
+                </div>
+            </div>
+
+            <!-- Education -->
+            <div id="education" class="content-section">
+                <div class="inner-panel">
+                    <h2>University at Buffalo (SUNY)</h2>
+                    <span class="date-badge">Jan 2026 - Dec 2028</span>
+                    <p><strong>Electrical Engineering, Bachelor's of Science</strong></p>
+                    <p><strong>Courses:</strong> Electronic Devices & Circuits (w/Lab), Circuit Analysis, C/C++ Programming, Physics 2</p>
+                </div>
+                
+                <div class="inner-panel">
+                    <h2>Taylors College (Malaysia)</h2>
+                    <span class="date-badge">Jul 2024 - Aug 2025</span>
+                    <p><strong>Study: Pre-Engineering, Engineering Diploma</strong></p>
+                    <p>Transferred to University at Buffalo after completing engineering prerequisites (Calculus, Physics, Chemistry).</p>
+                </div>
+            </div>
+
+            <!-- Experience -->
+            <div id="experience" class="content-section">
+                <div class="inner-panel">
+                    <h2>UBIT Help Center, University at Buffalo</h2>
+                    <h3>IT Assistant</h3>
+                    <span class="date-badge">June 2026 - Present</span>
+                    <ul>
+                        <li>Troubleshoot diverse hardware, software, and network issues, including campus Wi-Fi, account recovery, two-factor authentication, and operating systems (Windows, macOS, IOS, Android).</li>
+                        <li>Assist users with installing and navigating campus software packages like Hub, Panopto, and Microsoft 365, while carefully documenting all support requests.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Projects -->
+            <div id="projects" class="content-section">
+                <div class="inner-panel">
+                    <h2>Pico-Powered Ventilation Interface</h2>
+                    <ul>
+                        <li>Designed a light-responsive automation system using a Raspberry Pi Pico to control a DC fan based on real-time ambient light levels.</li>
+                        <li>Prototyped the full hardware stack on a breadboard, ensuring stable signal routing and power distribution between sensors and actuators.</li>
+                        <li>Integrated an N-Channel MOSFET to safely switch high-current loads from 3.3V microcontroller logic, preventing GPIO overcurrent.</li>
+                        <li>Developed MicroPython firmware to process analog sensor data (ADC) and execute threshold-based motor activation.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Skills -->
+            <div id="skills" class="content-section">
+                <div class="inner-panel">
+                    <h2>Technical Skills</h2>
+                    <div class="skills-grid">
+                        <div class="skill-pill">LTSpice</div>
+                        <div class="skill-pill">Oscilloscope/Multimeter</div>
+                        <div class="skill-pill">Python</div>
+                        <div class="skill-pill">Embedded Systems</div>
+                        <div class="skill-pill">Circuit Prototyping</div>
+                        <div class="skill-pill">MicroPython</div>
+                        <div class="skill-pill">Sensor Integration</div>
+                        <div class="skill-pill">MATLAB</div>
+                        <div class="skill-pill">C/C++ Basics</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabId, btnElement) {
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
+
+            btnElement.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        function createBubbles() {
+            const container = document.getElementById('bubble-container');
+            // Responsive bubble count based on screen width
+            const isMobile = window.innerWidth < 768;
+            const bubbleCount = isMobile ? 8 : 20;
+
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+                
+                const size = Math.random() * 50 + 20; 
+                const left = Math.random() * 100; 
+                const duration = Math.random() * 8 + 6; 
+                const delay = Math.random() * 5; 
+
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                bubble.style.left = `${left}%`;
+                bubble.style.animationDuration = `${duration}s`;
+                bubble.style.animationDelay = `${delay}s`;
+
+                container.appendChild(bubble);
+            }
+        }
+
+        window.onload = createBubbles;
+        // Re-calculate bubbles if rotated/resized significantly
+        window.onresize = () => {
+            document.getElementById('bubble-container').innerHTML = '';
+            createBubbles();
+        };
+    </script>
+</body>
+</html>
